@@ -300,6 +300,105 @@ header{
   cursor:pointer;
 }
 
+/* DETAIL PRODUK */
+
+.product-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:200;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  backdrop-filter:blur(4px);
+}
+
+.product-detail{
+  width:100%;
+  max-width:430px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:22px;
+  position:relative;
+  box-shadow:0 15px 50px #0005;
+  animation:productPopup .2s ease;
+}
+
+@keyframes productPopup{
+  from{
+    opacity:0;
+    transform:scale(.94) translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+.close-product{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#ffffffdd;
+  font-size:20px;
+  cursor:pointer;
+  z-index:2;
+}
+
+.detail-image{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  display:block;
+}
+
+.detail-content{
+  padding:20px;
+}
+
+.detail-category{
+  color:#00a86b;
+  font-size:12px;
+  font-weight:bold;
+  text-transform:uppercase;
+}
+
+.detail-content h2{
+  margin:7px 0;
+  font-size:22px;
+}
+
+.detail-price{
+  color:#00a86b;
+  font-size:21px;
+  font-weight:800;
+  margin:8px 0 12px;
+}
+
+.detail-description{
+  color:#555;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.detail-buy{
+  display:block;
+  text-align:center;
+  padding:13px;
+  background:#00a86b;
+  color:white;
+  text-decoration:none;
+  border-radius:12px;
+  font-weight:bold;
+}
+
 /* LOGIN */
 .login-box{
   display:none;
@@ -554,7 +653,42 @@ Batal Edit
 
 </section>
 
+<!-- DETAIL PRODUK -->
+<div id="productModal" class="product-modal">
 
+  <div class="product-detail">
+
+    <button class="close-product" onclick="closeProductDetail()">
+      ✕
+    </button>
+
+    <img id="detailImage" class="detail-image">
+
+    <div class="detail-content">
+
+      <span id="detailCategory" class="detail-category"></span>
+
+      <h2 id="detailName"></h2>
+
+      <div id="detailPrice" class="detail-price"></div>
+
+      <p id="detailDescription" class="detail-description"></p>
+
+      <a
+        id="detailBuy"
+        class="detail-buy"
+        href="#"
+        target="_blank"
+        rel="noopener">
+        🛍️ Lihat di Tokopedia
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+  
 <div id="loginBox" class="login-box">
 
 <div class="login">
@@ -831,7 +965,7 @@ const searchOK =
 
     container.innerHTML += `
 
-      <div class="card">
+      <div class="card" onclick="openProductDetail(${products.indexOf(p)})">
 
         <img
         src="${p.image}"
@@ -856,10 +990,11 @@ const searchOK =
           </div>
 
           <a
-          class="buy"
-          href="${p.link}"
-          target="_blank"
-          rel="noopener">
+class="buy"
+href="${p.link}"
+target="_blank"
+rel="noopener"
+onclick="event.stopPropagation()">
 
           🛒 Beli di Tokopedia
 
@@ -875,7 +1010,55 @@ const searchOK =
 
 }
 
+/* DETAIL PRODUK */
 
+window.openProductDetail=function(index){
+
+  const p = products[index];
+
+  if(!p) return;
+
+  document.getElementById("detailImage").src =
+    p.image || "";
+
+  document.getElementById("detailName").textContent =
+    p.name || "Produk";
+
+  document.getElementById("detailCategory").textContent =
+    p.category || "Produk";
+
+  document.getElementById("detailPrice").textContent =
+    p.price || "";
+
+  document.getElementById("detailDescription").textContent =
+    p.description || "Produk pilihan dari FinzMART.";
+
+  document.getElementById("detailBuy").href =
+    p.link || "#";
+
+  document.getElementById("productModal").style.display =
+    "flex";
+};
+
+
+window.closeProductDetail=function(){
+
+  document.getElementById("productModal").style.display =
+    "none";
+
+};
+
+
+document.getElementById("productModal")
+.addEventListener("click",function(e){
+
+  if(e.target === this){
+
+    closeProductDetail();
+
+  }
+
+});
 /* CATEGORY */
 
 window.setCategory=function(category,button){
