@@ -4,426 +4,241 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FinzMART - Katalog Produk Pilihan</title>
-
-<meta name="description" content="FinzMART - Temukan berbagai produk pilihan dengan harga menarik.">
+<title>FinzMART</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
 }
 
-body {
-    background: #f5f7fb;
-    color: #202124;
-    transition: 0.3s;
+body{
+    background:#f5f6f8;
+    color:#222;
 }
 
-body.dark {
-    background: #101114;
-    color: #f1f1f1;
+header{
+    background:#00a86b;
+    color:white;
+    padding:18px;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
-/* HEADER */
-header {
-    background: linear-gradient(135deg, #00a86b, #00c878);
-    color: white;
-    padding: 22px 16px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 15px rgba(0,0,0,.15);
+.header{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.header-inner {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
+.logo{
+    font-size:23px;
+    font-weight:bold;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: 800;
+.owner-btn{
+    border:0;
+    background:white;
+    color:#00a86b;
+    padding:9px 14px;
+    border-radius:20px;
+    font-weight:bold;
 }
 
-.logo span {
-    color: #fff59d;
+.hero{
+    max-width:1100px;
+    margin:20px auto;
+    padding:30px 20px;
+    border-radius:20px;
+    color:white;
+    background:linear-gradient(135deg,#007d50,#00c878);
 }
 
-.header-buttons {
-    display: flex;
-    gap: 8px;
+.hero h1{
+    font-size:30px;
+    margin-bottom:8px;
 }
 
-.icon-btn {
-    border: none;
-    background: rgba(255,255,255,.18);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
+.search{
+    max-width:1100px;
+    margin:20px auto;
+    padding:0 15px;
 }
 
-/* HERO */
-.hero {
-    max-width: 1100px;
-    margin: 25px auto;
-    padding: 35px 25px;
-    border-radius: 24px;
-    background: linear-gradient(135deg, #006b45, #00b96b);
-    color: white;
-    position: relative;
-    overflow: hidden;
+.search input{
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:14px;
+    box-shadow:0 3px 15px #0001;
+    outline:none;
 }
 
-.hero h1 {
-    font-size: 35px;
-    margin-bottom: 10px;
+.categories{
+    max-width:1100px;
+    margin:15px auto;
+    padding:0 15px;
+    display:flex;
+    gap:8px;
+    overflow:auto;
 }
 
-.hero p {
-    max-width: 600px;
-    line-height: 1.6;
-    opacity: .95;
+.categories button{
+    white-space:nowrap;
+    border:0;
+    padding:10px 15px;
+    border-radius:20px;
+    background:white;
 }
 
-.hero-badge {
-    display: inline-block;
-    background: rgba(255,255,255,.18);
-    padding: 8px 14px;
-    border-radius: 30px;
-    margin-bottom: 15px;
-    font-size: 13px;
+.categories button.active{
+    background:#00a86b;
+    color:white;
 }
 
-/* SEARCH */
-.search-area {
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 0 16px;
+.products{
+    max-width:1100px;
+    margin:25px auto;
+    padding:0 15px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
-.search-box {
-    background: white;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    padding: 5px 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.07);
+.card{
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 15px #0001;
 }
 
-.dark .search-box {
-    background: #1c1e22;
+.card img{
+    width:100%;
+    aspect-ratio:1;
+    object-fit:cover;
 }
 
-.search-box span {
-    font-size: 20px;
+.card-content{
+    padding:12px;
 }
 
-.search-box input {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 14px;
-    font-size: 15px;
-    background: transparent;
-    color: inherit;
+.category{
+    color:#00a86b;
+    font-size:12px;
+    font-weight:bold;
 }
 
-/* CATEGORY */
-.categories {
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 0 16px;
-    display: flex;
-    gap: 9px;
-    overflow-x: auto;
+.name{
+    font-weight:bold;
+    margin:7px 0;
 }
 
-.categories::-webkit-scrollbar {
-    display: none;
+.price{
+    color:#00a86b;
+    font-weight:bold;
+    font-size:18px;
 }
 
-.category {
-    border: none;
-    background: white;
-    padding: 10px 17px;
-    border-radius: 30px;
-    cursor: pointer;
-    white-space: nowrap;
-    font-weight: 600;
-    transition: .2s;
+.buy{
+    display:block;
+    text-align:center;
+    margin-top:10px;
+    padding:10px;
+    background:#00a86b;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
 }
 
-.dark .category {
-    background: #1c1e22;
-    color: white;
+#ownerPanel{
+    display:none;
+    max-width:1100px;
+    margin:20px auto;
+    padding:20px;
+    background:white;
+    border-radius:18px;
 }
 
-.category.active,
-.category:hover {
-    background: #00a86b;
-    color: white;
+#ownerPanel input,
+#ownerPanel select{
+    width:100%;
+    padding:12px;
+    margin:6px 0;
+    border:1px solid #ddd;
+    border-radius:10px;
 }
 
-/* SECTION */
-.section {
-    max-width: 1100px;
-    margin: 35px auto;
-    padding: 0 16px;
+.panel-btn{
+    border:0;
+    padding:10px 15px;
+    border-radius:10px;
+    margin-top:7px;
+    cursor:pointer;
 }
 
-.section-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 18px;
+.save{
+    background:#00a86b;
+    color:white;
 }
 
-.section-title h2 {
-    font-size: 22px;
+.logout{
+    background:#e53935;
+    color:white;
 }
 
-/* PRODUCTS */
-.products {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 17px;
+.admin-product{
+    border-top:1px solid #ddd;
+    padding:12px 0;
 }
 
-.product {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 5px 18px rgba(0,0,0,.07);
-    transition: .25s;
-    position: relative;
+.admin-product button{
+    padding:7px;
+    margin:3px;
 }
 
-.dark .product {
-    background: #1c1e22;
+.login-box{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:100;
+    align-items:center;
+    justify-content:center;
 }
 
-.product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,.13);
+.login{
+    width:90%;
+    max-width:380px;
+    background:white;
+    padding:25px;
+    border-radius:18px;
 }
 
-.product-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    background: #eee;
+.login input{
+    width:100%;
+    padding:12px;
+    margin:7px 0;
 }
 
-.product-content {
-    padding: 13px;
-}
-
-.product-category {
-    color: #00a86b;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 6px;
-}
-
-.product-name {
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.35;
-    margin-bottom: 8px;
-}
-
-.rating {
-    font-size: 12px;
-    color: #f4a900;
-    margin-bottom: 8px;
-}
-
-.price {
-    font-size: 18px;
-    font-weight: 800;
-    color: #00a86b;
-}
-
-.old-price {
-    color: #999;
-    font-size: 12px;
-    text-decoration: line-through;
-    margin-left: 5px;
-}
-
-.buy-btn {
-    display: block;
-    text-align: center;
-    margin-top: 12px;
-    padding: 11px;
-    border-radius: 12px;
-    background: #00a86b;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: .2s;
-}
-
-.buy-btn:hover {
-    background: #008c59;
-}
-
-.discount {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #ff3d3d;
-    color: white;
-    padding: 5px 8px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-/* EMPTY */
-.empty {
-    text-align: center;
-    padding: 40px;
-    display: none;
-    color: #777;
-}
-
-/* INFO */
-.info {
-    max-width: 1100px;
-    margin: 30px auto;
-    padding: 0 16px;
-}
-
-.info-box {
-    background: white;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 5px 18px rgba(0,0,0,.06);
-    line-height: 1.7;
-}
-
-.dark .info-box {
-    background: #1c1e22;
-}
-
-/* FOOTER */
-footer {
-    margin-top: 50px;
-    background: #111;
-    color: white;
-    padding: 35px 16px;
-}
-
-.footer-inner {
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
-
-.footer-logo {
-    font-size: 23px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.footer-text {
-    color: #aaa;
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-.social {
-    margin-top: 15px;
-}
-
-.social a {
-    color: white;
-    text-decoration: none;
-    margin: 0 8px;
-}
-
-/* MOBILE */
-@media (max-width: 850px) {
-    .products {
-        grid-template-columns: repeat(3, 1fr);
+@media(max-width:800px){
+    .products{
+        grid-template-columns:repeat(3,1fr);
     }
 }
 
-@media (max-width: 600px) {
-
-    .header-inner {
-        align-items: center;
+@media(max-width:600px){
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
     }
 
-    .logo {
-        font-size: 21px;
-    }
-
-    .hero {
-        margin: 15px 12px;
-        padding: 28px 20px;
-        border-radius: 20px;
-    }
-
-    .hero h1 {
-        font-size: 27px;
-    }
-
-    .products {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 11px;
-    }
-
-    .product {
-        border-radius: 14px;
-    }
-
-    .product-content {
-        padding: 10px;
-    }
-
-    .product-name {
-        font-size: 13px;
-    }
-
-    .price {
-        font-size: 16px;
-    }
-
-    .buy-btn {
-        padding: 9px;
-        font-size: 13px;
-    }
-
-    .section-title h2 {
-        font-size: 19px;
-    }
-}
-
-/* ANIMATION */
-.product {
-    animation: muncul .5s ease;
-}
-
-@keyframes muncul {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .hero{
+        margin:15px 10px;
     }
 }
 </style>
@@ -431,544 +246,545 @@ footer {
 
 <body>
 
-<!-- HEADER -->
 <header>
-    <div class="header-inner">
+<div class="header">
 
-        <div class="logo">
-            🛍️ Finz<span>MART</span>
-        </div>
+<div class="logo">🛍️ FinzMART</div>
 
-        <div class="header-buttons">
-            <button class="icon-btn" onclick="toggleDark()" title="Mode gelap">
-                🌙
-            </button>
-        </div>
+<button class="owner-btn" onclick="openLogin()">
+🔐 Owner
+</button>
 
-    </div>
+</div>
 </header>
 
-
-<!-- HERO -->
 <section class="hero">
 
-    <div class="hero-badge">
-        ✨ Katalog Produk Pilihan
-    </div>
+<h1>Belanja lebih mudah di FinzMART</h1>
 
-    <h1>Belanja lebih mudah di FinzMART</h1>
-
-    <p>
-        Temukan berbagai produk pilihan dengan harga menarik.
-        Pilih produk yang kamu suka dan langsung cek produknya.
-    </p>
+<p>
+Temukan produk pilihan dan cek produknya langsung.
+</p>
 
 </section>
 
+<div class="search">
 
-<!-- SEARCH -->
-<div class="search-area">
-
-    <div class="search-box">
-
-        <span>🔎</span>
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Cari produk..."
-            oninput="searchProduct()"
-        >
-
-    </div>
+<input
+id="search"
+placeholder="🔎 Cari produk..."
+oninput="renderProducts()">
 
 </div>
 
-
-<!-- CATEGORY -->
 <div class="categories">
 
-    <button class="category active" onclick="filterCategory('Semua', this)">
-        Semua
-    </button>
+<button class="active" onclick="setCategory('Semua',this)">
+Semua
+</button>
 
-    <button class="category" onclick="filterCategory('Fashion', this)">
-        👕 Fashion
-    </button>
+<button onclick="setCategory('Fashion',this)">
+👕 Fashion
+</button>
 
-    <button class="category" onclick="filterCategory('Sandal', this)">
-        👡 Sandal
-    </button>
+<button onclick="setCategory('Sandal',this)">
+👡 Sandal
+</button>
 
-    <button class="category" onclick="filterCategory('Parfum', this)">
-        🌸 Parfum
-    </button>
+<button onclick="setCategory('Parfum',this)">
+🌸 Parfum
+</button>
 
-    <button class="category" onclick="filterCategory('Aksesoris', this)">
-        💎 Aksesoris
-    </button>
+<button onclick="setCategory('Aksesoris',this)">
+💎 Aksesoris
+</button>
 
-    <button class="category" onclick="filterCategory('Elektronik', this)">
-        📱 Elektronik
-    </button>
+<button onclick="setCategory('Elektronik',this)">
+📱 Elektronik
+</button>
+
+</div>
+
+<div id="products" class="products">
+
+<p>Memuat produk...</p>
 
 </div>
 
 
-<!-- PRODUK UNGGULAN -->
-<section class="section">
+<!-- PANEL OWNER -->
 
-    <div class="section-title">
-        <h2>🔥 Produk Pilihan</h2>
-    </div>
+<section id="ownerPanel">
 
-    <div class="products" id="productList">
+<h2>📊 Panel Owner</h2>
 
+<br>
 
-        <!-- PRODUK 1 -->
-        <div class="product"
-             data-category="Sandal"
-             data-name="Sandal Fashion Wanita">
+<button class="panel-btn logout" onclick="logout()">
+Keluar
+</button>
 
-            <div class="discount">-20%</div>
+<hr><br>
 
-            <img
-                class="product-image"
-                src="https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=600&q=80"
-                alt="Sandal Fashion Wanita"
-            >
+<h3>➕ Tambah Produk</h3>
 
-            <div class="product-content">
+<input id="pName" placeholder="Nama produk">
 
-                <div class="product-category">
-                    SANDA﻿L
-                </div>
+<input id="pPrice" placeholder="Harga contoh: Rp25.000">
 
-                <div class="product-name">
-                    Sandal Fashion Wanita
-                </div>
+<input id="pImage" placeholder="URL foto produk">
 
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐ 4.9
-                </div>
+<select id="pCategory">
 
-                <div class="price">
-                    Rp29.900
-                    <span class="old-price">Rp39.900</span>
-                </div>
+<option value="Fashion">Fashion</option>
+<option value="Sandal">Sandal</option>
+<option value="Parfum">Parfum</option>
+<option value="Aksesoris">Aksesoris</option>
+<option value="Elektronik">Elektronik</option>
 
-                <!-- GANTI LINK INI -->
-                <a
-                    href="https://vt.tokopedia.com/t/ZS9BSM14d27fU-ptvt5/"
-                    target="_blank"
-                    class="buy-btn"
-                >
-                    🛒 Beli di Tokopedia
-                </a>
+</select>
 
-            </div>
+<input id="pLink" placeholder="Link affiliate Tokopedia">
 
-        </div>
+<button class="panel-btn save" onclick="addProduct()">
+💾 Simpan Produk
+</button>
 
+<br><br>
 
-        <!-- PRODUK 2 -->
-        <div class="product"
-             data-category="Parfum"
-             data-name="Parfum Pria Elegant">
+<h3>📦 Produk Kamu</h3>
 
-            <div class="discount">-15%</div>
-
-            <img
-                class="product-image"
-                src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=600&q=80"
-                alt="Parfum Pria Elegant"
-            >
-
-            <div class="product-content">
-
-                <div class="product-category">
-                    PARFUM
-                </div>
-
-                <div class="product-name">
-                    Parfum Pria Elegant
-                </div>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐ 4.8
-                </div>
-
-                <div class="price">
-                    Rp45.000
-                    <span class="old-price">Rp53.000</span>
-                </div>
-
-                <!-- GANTI LINK INI -->
-                <a
-                    href="https://www.tokopedia.com/"
-                    target="_blank"
-                    class="buy-btn"
-                >
-                    🛒 Beli di Tokopedia
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- PRODUK 3 -->
-        <div class="product"
-             data-category="Fashion"
-             data-name="Kaos Oversize Premium">
-
-            <div class="discount">-30%</div>
-
-            <img
-                class="product-image"
-                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80"
-                alt="Kaos Oversize Premium"
-            >
-
-            <div class="product-content">
-
-                <div class="product-category">
-                    FASHION
-                </div>
-
-                <div class="product-name">
-                    Kaos Oversize Premium
-                </div>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐ 4.9
-                </div>
-
-                <div class="price">
-                    Rp39.900
-                    <span class="old-price">Rp59.900</span>
-                </div>
-
-                <!-- GANTI LINK INI -->
-                <a
-                    href="https://www.tokopedia.com/"
-                    target="_blank"
-                    class="buy-btn"
-                >
-                    🛒 Beli di Tokopedia
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- PRODUK 4 -->
-        <div class="product"
-             data-category="Aksesoris"
-             data-name="Jam Tangan Casual">
-
-            <div class="discount">-25%</div>
-
-            <img
-                class="product-image"
-                src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80"
-                alt="Jam Tangan Casual"
-            >
-
-            <div class="product-content">
-
-                <div class="product-category">
-                    AKSESORIS
-                </div>
-
-                <div class="product-name">
-                    Jam Tangan Casual
-                </div>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐☆ 4.7
-                </div>
-
-                <div class="price">
-                    Rp75.000
-                    <span class="old-price">Rp100.000</span>
-                </div>
-
-                <!-- GANTI LINK INI -->
-                <a
-                    href="https://www.tokopedia.com/"
-                    target="_blank"
-                    class="buy-btn"
-                >
-                    🛒 Beli di Tokopedia
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- PRODUK 5 -->
-        <div class="product"
-             data-category="Elektronik"
-             data-name="Headset Bluetooth">
-
-            <div class="discount">-35%</div>
-
-            <img
-                class="product-image"
-                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
-                alt="Headset Bluetooth"
-            >
-
-            <div class="product-content">
-
-                <div class="product-category">
-                    ELEKTRONIK
-                </div>
-
-                <div class="product-name">
-                    Headset Bluetooth
-                </div>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐ 4.8
-                </div>
-
-                <div class="price">
-                    Rp89.000
-                    <span class="old-price">Rp139.000</span>
-                </div>
-
-                <!-- GANTI LINK INI -->
-                <a
-                    href="https://www.tokopedia.com/"
-                    target="_blank"
-                    class="buy-btn"
-                >
-                    🛒 Beli di Tokopedia
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- PRODUK 6 -->
-        <div class="product"
-             data-category="Sandal"
-             data-name="Sandal Casual Pria">
-
-            <div class="discount">-18%</div>
-
-            <img
-                class="product-image"
-                src="https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=600&q=80"
-                alt="Sandal Casual Pria"
-            >
-
-            <div class="product-content">
-
-                <div class="product-category">
-                    SANDAL
-                </div>
-
-                <div class="product-name">
-                    Sandal Casual Pria
-                </div>
-
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐ 4.8
-                </div>
-
-                <div class="price">
-                    Rp35.000
-                    <span class="old-price">Rp42.000</span>
-                </div>
-
-                <!-- GANTI LINK INI -->
-                <a
-                    href="https://www.tokopedia.com/"
-                    target="_blank"
-                    class="buy-btn"
-                >
-                    🛒 Beli di Tokopedia
-                </a>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <div class="empty" id="empty">
-        😕 Produk tidak ditemukan.
-    </div>
+<div id="adminProducts"></div>
 
 </section>
 
 
-<!-- INFO -->
-<section class="info">
+<!-- LOGIN -->
 
-    <div class="info-box">
+<div id="loginBox" class="login-box">
 
-        <h2>🛍️ Tentang FinzMART</h2>
+<div class="login">
 
-        <br>
+<h2>🔐 Login Owner</h2>
 
-        <p>
-            FinzMART adalah katalog produk yang membantu kamu
-            menemukan berbagai produk menarik dari marketplace.
-        </p>
+<input
+id="email"
+type="email"
+placeholder="Email Owner">
 
-        <br>
+<input
+id="password"
+type="password"
+placeholder="Password">
 
-        <p>
-            Klik tombol <b>Beli di Tokopedia</b> pada produk
-            untuk melihat detail produk dan melakukan pembelian.
-        </p>
+<button
+class="panel-btn save"
+onclick="login()">
 
-    </div>
+Masuk
 
-</section>
+</button>
 
+<button
+class="panel-btn"
+onclick="closeLogin()">
 
-<!-- FOOTER -->
-<footer>
+Batal
 
-    <div class="footer-inner">
+</button>
 
-        <div class="footer-logo">
-            🛍️ FinzMART
-        </div>
+<p id="loginError"></p>
 
-        <div class="footer-text">
-            Katalog produk pilihan FinzMART.
-            <br>
-            © 2026 FinzMART. All rights reserved.
-        </div>
+</div>
 
-        <div class="social">
-
-            <a href="#" onclick="return false;">
-                TikTok
-            </a>
-
-            <a href="#" onclick="return false;">
-                Instagram
-            </a>
-
-        </div>
-
-    </div>
-
-</footer>
+</div>
 
 
-<script>
+<!-- FIREBASE -->
 
-/* DARK MODE */
+<script type="module">
 
-function toggleDark() {
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-    document.body.classList.toggle("dark");
+import {
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    if (document.body.classList.contains("dark")) {
-        localStorage.setItem("finzDark", "true");
-    } else {
-        localStorage.setItem("finzDark", "false");
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+deleteDoc,
+doc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/* ==================================================
+   🔥 TEMPEL FIREBASE CONFIG KAMU DI SINI
+   ================================================== */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDb3LcMiBnrwYg4Uy_Y_odwSyeHsiV_BVA",
+  authDomain: "finzmart-bfaa6.firebaseapp.com",
+  projectId: "finzmart-bfaa6",
+  storageBucket: "finzmart-bfaa6.firebasestorage.app",
+  messagingSenderId: "1044595942342",
+  appId: "1:1044595942342:web:46502112bd75c4616c48c7"
+};
+
+
+/* FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* DATA */
+
+let products = [];
+
+let activeCategory = "Semua";
+
+
+/* LOGIN */
+
+window.openLogin = function(){
+
+    document.getElementById("loginBox").style.display="flex";
+
+}
+
+window.closeLogin = function(){
+
+    document.getElementById("loginBox").style.display="none";
+
+}
+
+
+window.login = async function(){
+
+    const email =
+    document.getElementById("email").value;
+
+    const password =
+    document.getElementById("password").value;
+
+    try{
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+        closeLogin();
+
+    }catch(error){
+
+        document.getElementById("loginError").innerText =
+        "Login gagal. Periksa email dan password.";
+
     }
 
 }
 
-if (localStorage.getItem("finzDark") === "true") {
-    document.body.classList.add("dark");
+
+window.logout = async function(){
+
+    await signOut(auth);
+
+}
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(auth,(user)=>{
+
+    if(user){
+
+        document.getElementById("ownerPanel")
+        .style.display="block";
+
+        loadAdminProducts();
+
+    }else{
+
+        document.getElementById("ownerPanel")
+        .style.display="none";
+
+    }
+
+});
+
+
+/* LOAD PRODUCTS */
+
+async function loadProducts(){
+
+    const snapshot =
+    await getDocs(collection(db,"products"));
+
+    products=[];
+
+    snapshot.forEach((item)=>{
+
+        products.push({
+
+            id:item.id,
+
+            ...item.data()
+
+        });
+
+    });
+
+    renderProducts();
+
+}
+
+
+/* RENDER */
+
+window.renderProducts=function(){
+
+    const container =
+    document.getElementById("products");
+
+    const search =
+    document.getElementById("search")
+    .value
+    .toLowerCase();
+
+    container.innerHTML="";
+
+    const filtered =
+    products.filter(p=>{
+
+        const categoryOK =
+        activeCategory==="Semua" ||
+        p.category===activeCategory;
+
+        const searchOK =
+        (p.name || "")
+        .toLowerCase()
+        .includes(search);
+
+        return categoryOK && searchOK;
+
+    });
+
+    if(filtered.length===0){
+
+        container.innerHTML=
+        "<p>Produk belum tersedia.</p>";
+
+        return;
+
+    }
+
+    filtered.forEach(p=>{
+
+        container.innerHTML += `
+
+        <div class="card">
+
+            <img
+            src="${p.image}"
+            alt="${p.name}">
+
+            <div class="card-content">
+
+                <div class="category">
+                ${p.category}
+                </div>
+
+                <div class="name">
+                ${p.name}
+                </div>
+
+                <div class="price">
+                ${p.price}
+                </div>
+
+                <a
+                class="buy"
+                href="${p.link}"
+                target="_blank">
+
+                🛒 Beli di Tokopedia
+
+                </a>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
 }
 
 
 /* CATEGORY */
 
-let activeCategory = "Semua";
+window.setCategory=function(category,button){
 
-function filterCategory(category, button) {
+    activeCategory=category;
 
-    activeCategory = category;
-
-    document.querySelectorAll(".category").forEach(btn => {
-        btn.classList.remove("active");
-    });
+    document
+    .querySelectorAll(".categories button")
+    .forEach(b=>b.classList.remove("active"));
 
     button.classList.add("active");
 
-    filterProducts();
+    renderProducts();
+
 }
 
 
-/* SEARCH */
+/* ADD PRODUCT */
 
-function searchProduct() {
-    filterProducts();
-}
+window.addProduct=async function(){
+
+    const name =
+    document.getElementById("pName").value;
+
+    const price =
+    document.getElementById("pPrice").value;
+
+    const image =
+    document.getElementById("pImage").value;
+
+    const category =
+    document.getElementById("pCategory").value;
+
+    const link =
+    document.getElementById("pLink").value;
 
 
-/* FILTER */
+    if(!name || !price || !image || !link){
 
-function filterProducts() {
+        alert("Lengkapi semua data produk.");
 
-    const search =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase();
+        return;
 
-    const products =
-        document.querySelectorAll(".product");
+    }
 
-    let found = 0;
 
-    products.forEach(product => {
+    await addDoc(
+        collection(db,"products"),
+        {
 
-        const category =
-            product.dataset.category;
+            name,
+            price,
+            image,
+            category,
+            link,
 
-        const name =
-            product.dataset.name.toLowerCase();
-
-        const categoryMatch =
-            activeCategory === "Semua" ||
-            category === activeCategory;
-
-        const searchMatch =
-            name.includes(search);
-
-        if (categoryMatch && searchMatch) {
-
-            product.style.display = "block";
-            found++;
-
-        } else {
-
-            product.style.display = "none";
+            createdAt:
+            new Date()
 
         }
 
-    });
+    );
 
-    const empty =
-        document.getElementById("empty");
 
-    if (found === 0) {
-        empty.style.display = "block";
-    } else {
-        empty.style.display = "none";
-    }
+    alert("Produk berhasil ditambahkan!");
+
+
+    document.getElementById("pName").value="";
+    document.getElementById("pPrice").value="";
+    document.getElementById("pImage").value="";
+    document.getElementById("pLink").value="";
+
+
+    await loadProducts();
+
+    await loadAdminProducts();
 
 }
+
+
+/* ADMIN PRODUCTS */
+
+async function loadAdminProducts(){
+
+    const box =
+    document.getElementById("adminProducts");
+
+    box.innerHTML="Memuat...";
+
+    const snapshot =
+    await getDocs(collection(db,"products"));
+
+    box.innerHTML="";
+
+    snapshot.forEach(item=>{
+
+        const p=item.data();
+
+        box.innerHTML += `
+
+        <div class="admin-product">
+
+            <b>${p.name}</b>
+
+            <br>
+
+            ${p.price}
+
+            <br>
+
+            <button
+            onclick="deleteProduct('${item.id}')">
+
+            🗑️ Hapus
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* DELETE */
+
+window.deleteProduct=async function(id){
+
+    if(!confirm("Hapus produk ini?")) return;
+
+    await deleteDoc(
+        doc(db,"products",id)
+    );
+
+    await loadProducts();
+
+    await loadAdminProducts();
+
+}
+
+
+/* START */
+
+loadProducts();
 
 </script>
 
 </body>
-    </html>
+</html>
