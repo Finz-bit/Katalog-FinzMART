@@ -612,10 +612,14 @@ window.renderProducts=function(){
     activeCategory==="Semua" ||
     p.category===activeCategory;
 
-    const searchOK =
-    (p.name || "")
+    const searchText = search.toLowerCase();
+
+const searchOK =
+  (p.name || "")
     .toLowerCase()
-    .includes(search);
+    .includes(searchText) ||
+  String(p.number || "")
+    .includes(searchText);
 
     return categoryOK && searchOK;
 
