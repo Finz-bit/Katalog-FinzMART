@@ -258,11 +258,12 @@ header{
 .categories{
   max-width:1100px;
   margin:12px auto;
-  padding:0 15px 5px;
+  padding:0 15px 7px;
   display:flex;
   gap:8px;
   overflow-x:auto;
   scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
 }
 
 .categories::-webkit-scrollbar{
@@ -270,22 +271,32 @@ header{
 }
 
 .categories button{
-  border:1px solid #e2e5e8;
-  padding:10px 15px;
-  border-radius:22px;
+  border:1px solid #e2e8e5;
+  padding:9px 16px;
+  border-radius:14px;
   background:white;
-  color:#444;
+  color:#3f4a45;
   white-space:nowrap;
   font-size:13px;
   font-weight:600;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-height:38px;
+  transition:.2s ease;
+}
+
+.categories button:active{
+  transform:scale(.96);
 }
 
 .categories button.active{
-  background:#00a86b;
+  background:#008f5a;
   color:white;
-  border-color:#00a86b;
-  box-shadow:0 4px 12px #00a86b30;
+  border-color:#008f5a;
+  box-shadow:0 4px 12px #008f5a30;
 }
 
 /* PRODUK */
@@ -851,33 +862,42 @@ header{
 
 <div class="categories">
 
-<button onclick="showFavorites()">
-❤️ Favorit Saya
-</button>
+  <button onclick="showFavorites()">
+    <svg class="category-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M20.8 8.7c0 5.5-8.8 10.3-8.8 10.3S3.2 14.2 3.2 8.7A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+    </svg>
+    Favorit
+  </button>
 
-<button class="active" onclick="setCategory('Semua',this)">
-Semua
-</button>
+  <button class="active" onclick="setCategory('Semua',this)">
+    Semua
+  </button>
 
-<button onclick="setCategory('Fashion',this)">
-👕 Fashion
-</button>
+  <button onclick="setCategory('Fashion',this)">
+    Fashion
+  </button>
 
-<button onclick="setCategory('Sandal',this)">
-👡 Sandal
-</button>
+  <button onclick="setCategory('Sandal',this)">
+    Sandal
+  </button>
 
-<button onclick="setCategory('Parfum',this)">
-🌸 Parfum
-</button>
+  <button onclick="setCategory('Parfum',this)">
+    Parfum
+  </button>
 
-<button onclick="setCategory('Aksesoris',this)">
-💎 Aksesoris
-</button>
+  <button onclick="setCategory('Aksesoris',this)">
+    Aksesoris
+  </button>
 
-<button onclick="setCategory('Elektronik',this)">
-📱 Elektronik
-</button>
+  <button onclick="setCategory('Elektronik',this)">
+    Elektronik
+  </button>
 
 </div>
 
