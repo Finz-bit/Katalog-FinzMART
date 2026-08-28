@@ -215,7 +215,18 @@ header{
   font-weight:800;
   font-size:17px;
 }
-
+  
+.discount{
+  display:inline-block;
+  margin-left:5px;
+  padding:3px 6px;
+  border-radius:6px;
+  background:#e53935;
+  color:white;
+  font-size:10px;
+  font-weight:bold;
+}
+  
 .buy{
   display:block;
   text-align:center;
@@ -642,7 +653,8 @@ Keluar
 <input id="pName" placeholder="Nama produk">
 
 <input id="pPrice" placeholder="Harga contoh: Rp25.000">
-
+<input id="pOldPrice" placeholder="Harga sebelum diskon (opsional)">
+  
 <select id="pCategory">
 <option value="Fashion">Fashion</option>
 <option value="Sandal">Sandal</option>
@@ -1000,6 +1012,13 @@ const searchOK =
 
     const nomor =
     p.number || index+1;
+    const discount = p.oldPrice
+  ? Math.round(
+      ((parseInt(p.oldPrice.replace(/\D/g,"")) -
+        parseInt(p.price.replace(/\D/g,""))) /
+        parseInt(p.oldPrice.replace(/\D/g,""))) * 100
+    )
+  : 0;
 
     container.innerHTML += `
 
@@ -1028,8 +1047,10 @@ const searchOK =
           </div>
 
           <div class="price">
-          ${p.price}
-          </div>
+  ${p.oldPrice ? `<del>${p.oldPrice}</del> ` : ""}
+  ${p.price}
+  ${discount > 0 ? `<span class="discount">-${discount}%</span>` : ""}
+</div>
 
           <a
 class="buy"
@@ -1354,6 +1375,9 @@ window.saveProduct=async function(){
   const price =
   document.getElementById("pPrice").value.trim();
 
+  const oldPrice =
+document.getElementById("pOldPrice").value.trim();
+  
   const category =
   document.getElementById("pCategory").value;
 
@@ -1403,6 +1427,7 @@ window.saveProduct=async function(){
 
           name,
           price,
+          oldPrice,
           category,
           link,
 
@@ -1428,6 +1453,7 @@ window.saveProduct=async function(){
 
           name,
           price,
+          oldPrice,
           category,
           link,
           image:imageURL,
