@@ -43,8 +43,18 @@ header{
 }
 
 .logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
   font-size:22px;
   font-weight:800;
+  color:#006f49;
+}
+
+.logo-icon{
+  width:32px;
+  height:32px;
+  flex-shrink:0;
 }
 
 .owner-btn{
@@ -690,7 +700,28 @@ header{
 
 <header>
 <div class="header">
-<div class="logo">🛍️ FinzMART</div>
+<div class="logo">
+
+  <svg class="logo-icon" viewBox="0 0 48 48" aria-hidden="true">
+    <path
+      d="M10 17h28l-2 23H12L10 17Z"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="3"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M17 18v-4a7 7 0 0 1 14 0v4"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="3"
+      stroke-linecap="round"
+    />
+  </svg>
+
+  <span>FinzMART</span>
+
+</div>
 
 <button class="owner-btn" onclick="openLogin()">
 🔐 Owner
