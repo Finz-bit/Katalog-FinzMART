@@ -722,7 +722,13 @@ header{
   right:8px;
   font-size:17px;
 }
-
+.favorite-icon{
+  width:20px;
+  height:20px;
+  display:block;
+  margin:auto;
+}
+  
 .card img{
   aspect-ratio:1/1;
 }
@@ -1319,11 +1325,28 @@ const searchOK =
 <button
   class="favorite-btn"
   onclick="toggleFavorite(event, ${products.indexOf(p)})">
-  ${favorites.some(f => f.id === p.id) ? "❤️" : "🤍"}
+  ${favorites.some(f => f.id === p.id)
+  ? `<svg class="favorite-icon" viewBox="0 0 24 24" aria-hidden="true">
+       <path
+         d="M20.8 8.7c0 5.5-8.8 10.3-8.8 10.3S3.2 14.2 3.2 8.7A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6Z"
+         fill="currentColor"
+       />
+     </svg>`
+  : `<svg class="favorite-icon" viewBox="0 0 24 24" aria-hidden="true">
+       <path
+         d="M20.8 8.7c0 5.5-8.8 10.3-8.8 10.3S3.2 14.2 3.2 8.7A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6Z"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linejoin="round"
+       />
+          </svg>`
+  }
 </button>
-        <img
-        src="${p.image}"
-        alt="${p.name}">
+
+<img
+src="${p.image}"
+alt="${p.name}">
 
         <div class="card-content">
 
