@@ -1262,7 +1262,23 @@ async function loadProducts(){
     });
 
     renderProducts();
+    
+// DEEP LINK PRODUK
+const productId =
+  new URLSearchParams(window.location.search).get("product");
 
+if(productId){
+
+  const index =
+    products.findIndex(
+      p => String(p.id) === String(productId)
+    );
+
+  if(index !== -1){
+    openProductDetail(index);
+  }
+
+  }
   }catch(error){
 
     console.error(error);
