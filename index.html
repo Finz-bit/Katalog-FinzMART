@@ -406,6 +406,13 @@ header{
   font-size:13px;
   font-weight:bold;
 }
+.buy-icon{
+  width:17px;
+  height:17px;
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:5px;
+  }
 
 /* PANEL OWNER */
 #ownerPanel{
@@ -1375,7 +1382,20 @@ target="_blank"
 rel="noopener"
 onclick="event.stopPropagation()">
 
-          🛒 Beli di Tokopedia
+<svg class="buy-icon" viewBox="0 0 24 24" aria-hidden="true">
+  <path
+    d="M3 4h2l2.2 11.5a2 2 0 0 0 2 1.5h7.8a2 2 0 0 0 1.9-1.4L21 8H6"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <circle cx="10" cy="20" r="1.5" fill="currentColor"/>
+  <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+</svg>
+
+<span>Beli di Tokopedia</span>
 
           </a>
 
