@@ -82,6 +82,115 @@ header{
   line-height:1.5;
 }
 
+/* BANNER PROMO */
+.promo-slider{
+  max-width:1100px;
+  margin:18px auto;
+  padding:0 15px;
+}
+
+.promo-container{
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+  box-shadow:0 6px 20px #0002;
+}
+
+.promo-track{
+  display:flex;
+  transition:transform .45s ease;
+}
+
+.promo-slide{
+  min-width:100%;
+  padding:24px 25px;
+  color:white;
+  min-height:150px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.promo-slide:nth-child(1){
+  background:linear-gradient(135deg,#ff7a18,#ff3d00);
+}
+
+.promo-slide:nth-child(2){
+  background:linear-gradient(135deg,#7b2ff7,#f107a3);
+}
+
+.promo-slide:nth-child(3){
+  background:linear-gradient(135deg,#008f5a,#00bd78);
+}
+
+.promo-text h2{
+  font-size:23px;
+  margin-bottom:7px;
+}
+
+.promo-text p{
+  font-size:13px;
+  opacity:.95;
+  line-height:1.5;
+}
+
+.promo-icon{
+  font-size:55px;
+  flex-shrink:0;
+}
+
+.promo-dots{
+  position:absolute;
+  bottom:10px;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+}
+
+.promo-dot{
+  width:7px;
+  height:7px;
+  border:0;
+  border-radius:50%;
+  background:#ffffff88;
+  padding:0;
+}
+
+.promo-dot.active{
+  width:20px;
+  border-radius:10px;
+  background:white;
+}
+
+@media(max-width:600px){
+
+  .promo-slider{
+    margin:14px 10px;
+    padding:0;
+  }
+
+  .promo-slide{
+    min-height:135px;
+    padding:20px;
+  }
+
+  .promo-text h2{
+    font-size:19px;
+  }
+
+  .promo-text p{
+    font-size:12px;
+  }
+
+  .promo-icon{
+    font-size:43px;
+  }
+
+}
+  
 /* SEARCH */
 .search{
   max-width:1100px;
@@ -593,6 +702,46 @@ header{
 <h1>Belanja lebih mudah di FinzMART</h1>
 <p>Temukan produk pilihan dan cek produknya langsung.</p>
 </section>
+  <!-- BANNER PROMO -->
+<div class="promo-slider">
+  <div class="promo-container">
+
+    <div class="promo-track" id="promoTrack">
+
+      <div class="promo-slide">
+        <div class="promo-text">
+          <h2>🔥 Promo Spesial FinzMART!</h2>
+          <p>Temukan berbagai produk menarik dengan harga lebih hemat.</p>
+        </div>
+        <div class="promo-icon">🛍️</div>
+      </div>
+
+      <div class="promo-slide">
+        <div class="promo-text">
+          <h2>💸 Belanja Lebih Hemat</h2>
+          <p>Cari produk favoritmu dan temukan penawaran terbaik.</p>
+        </div>
+        <div class="promo-icon">🏷️</div>
+      </div>
+
+      <div class="promo-slide">
+        <div class="promo-text">
+          <h2>✨ Pilihan Produk Terbaik</h2>
+          <p>Fashion, elektronik, kebutuhan sehari-hari, dan masih banyak lagi.</p>
+        </div>
+        <div class="promo-icon">⭐</div>
+      </div>
+
+    </div>
+
+    <div class="promo-dots">
+      <button class="promo-dot active" onclick="goPromo(0)"></button>
+      <button class="promo-dot" onclick="goPromo(1)"></button>
+      <button class="promo-dot" onclick="goPromo(2)"></button>
+    </div>
+
+  </div>
+</div>
 
 <div class="search">
 <input
@@ -1655,6 +1804,29 @@ window.deleteProduct=async function(id){
 
 /* START */
 
+/* BANNER PROMO */
+let promoIndex = 0;
+const promoTrack = document.getElementById("promoTrack");
+const promoDots = document.querySelectorAll(".promo-dot");
+
+function goPromo(index){
+  promoIndex = index;
+
+  if(promoTrack){
+    promoTrack.style.transform =
+      `translateX(-${index * 100}%)`;
+  }
+
+  promoDots.forEach((dot, i) => {
+    dot.classList.toggle("active", i === index);
+  });
+}
+
+setInterval(() => {
+  promoIndex = (promoIndex + 1) % 3;
+  goPromo(promoIndex);
+}, 4000);
+  
 loadProducts();
 
 </script>
