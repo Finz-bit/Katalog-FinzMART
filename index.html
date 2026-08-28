@@ -216,19 +216,42 @@ header{
   padding:0 15px;
 }
 
-.search input{
-  width:100%;
-  padding:15px 17px;
-  border:2px solid transparent;
-  border-radius:15px;
-  outline:none;
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
   background:white;
-  font-size:15px;
-  box-shadow:0 4px 18px #0000000d;
+  padding:4px 15px;
+  border:2px solid #e5eee9;
+  border-radius:16px;
+  box-shadow:0 5px 18px #0000000d;
+  transition:.2s ease;
 }
 
-.search input:focus{
+.search-box:focus-within{
   border-color:#00a86b;
+  box-shadow:0 6px 20px #00a86b20;
+}
+
+.search-icon{
+  width:20px;
+  height:20px;
+  flex-shrink:0;
+  color:#008f5a;
+}
+
+.search input{
+  width:100%;
+  padding:12px 0;
+  border:0;
+  outline:none;
+  background:transparent;
+  font-size:15px;
+  color:#222;
+}
+
+.search input::placeholder{
+  color:#8a9a93;
 }
 
 /* KATEGORI */
@@ -798,10 +821,32 @@ header{
 </div>
 
 <div class="search">
-<input
-id="search"
-placeholder="🔎 Cari produk..."
-oninput="renderProducts()">
+  <div class="search-box">
+
+    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle
+        cx="11"
+        cy="11"
+        r="7"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      />
+      <path
+        d="m16.5 16.5 4 4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </svg>
+
+    <input
+      id="search"
+      placeholder="Cari produk di FinzMART..."
+      oninput="renderProducts()">
+
+  </div>
 </div>
 
 <div class="categories">
