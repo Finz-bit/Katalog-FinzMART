@@ -147,8 +147,23 @@ header{
   grid-template-columns:repeat(4,1fr);
   gap:16px;
 }
+.favorite-btn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 3px 10px #0002;
+  font-size:20px;
+  cursor:pointer;
+  z-index:5;
+}
 
 .card{
+  position:relative;
   background:white;
   border-radius:17px;
   overflow:hidden;
@@ -576,12 +591,35 @@ oninput="renderProducts()">
 </div>
 
 <div class="categories">
-<button class="active" onclick="setCategory('Semua',this)">Semua</button>
-<button onclick="setCategory('Fashion',this)">👕 Fashion</button>
-<button onclick="setCategory('Sandal',this)">👡 Sandal</button>
-<button onclick="setCategory('Parfum',this)">🌸 Parfum</button>
-<button onclick="setCategory('Aksesoris',this)">💎 Aksesoris</button>
-<button onclick="setCategory('Elektronik',this)">📱 Elektronik</button>
+
+<button onclick="showFavorites()">
+❤️ Favorit Saya
+</button>
+
+<button class="active" onclick="setCategory('Semua',this)">
+Semua
+</button>
+
+<button onclick="setCategory('Fashion',this)">
+👕 Fashion
+</button>
+
+<button onclick="setCategory('Sandal',this)">
+👡 Sandal
+</button>
+
+<button onclick="setCategory('Parfum',this)">
+🌸 Parfum
+</button>
+
+<button onclick="setCategory('Aksesoris',this)">
+💎 Aksesoris
+</button>
+
+<button onclick="setCategory('Elektronik',this)">
+📱 Elektronik
+</button>
+
 </div>
 
 <div id="products" class="products">
@@ -966,7 +1004,11 @@ const searchOK =
     container.innerHTML += `
 
       <div class="card" onclick="openProductDetail(${products.indexOf(p)})">
-
+<button
+  class="favorite-btn"
+  onclick="toggleFavorite(event, ${products.indexOf(p)})">
+  ${favorites.some(f => f.id === p.id) ? "❤️" : "🤍"}
+</button>
         <img
         src="${p.image}"
         alt="${p.name}">
@@ -1059,6 +1101,159 @@ document.getElementById("productModal")
   }
 
 });
+  /* FAVORIT */
+
+let favorites = JSON.parse(
+  localStorage.getItem("finzmartFavorites") || "[]"
+);
+
+window.toggleFavorite = function(event, index){
+
+  event.stopPropagation();
+
+  const product = products[index];
+
+  if(!product) return;
+
+  const favoriteIndex = favorites.findIndex(
+    p => p.id === product.id
+  );
+
+  if(favoriteIndex === -1){
+
+    favorites.push(product);
+
+  }else{
+
+    favorites.splice(favoriteIndex, 1);
+
+  }
+
+  localStorage.setItem(
+    "finzmartFavorites",
+    JSON.stringify(favorites)
+  );
+
+  renderProducts();
+
+};
+  window.showFavorites = function(){
+
+  const container =
+    document.getElementById("products");
+
+  container.innerHTML = "";
+
+  if(favorites.length === 0){
+
+    container.innerHTML =
+      "<p>Belum ada produk favorit ❤️</p>";
+
+    return;
+
+  }
+
+  favorites.forEach((p,index)=>{
+
+    container.innerHTML += `
+
+      <div class="card"
+        onclick="openFavoriteDetail(${index})">
+
+        <button
+          class="favorite-btn"
+          onclick="removeFavorite(event, ${index})">
+          ❤️
+        </button>
+
+        <img
+          src="${p.image}"
+          alt="${p.name}">
+
+        <div class="card-content">
+
+          <div class="number">
+            Produk #${p.number || index+1}
+          </div>
+
+          <div class="category">
+            ${p.category || ""}
+          </div>
+
+          <div class="name">
+            ${p.name || ""}
+          </div>
+
+          <div class="price">
+            ${p.price || ""}
+          </div>
+
+          <a
+            class="buy"
+            href="${p.link || "#"}"
+            target="_blank"
+            rel="noopener"
+            onclick="event.stopPropagation()">
+
+            🛒 Beli di Tokopedia
+
+          </a>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+};
+  /* FUNGSI FAVORIT */
+
+window.openFavoriteDetail = function(index){
+
+  const p = favorites[index];
+
+  if(!p) return;
+
+  document.getElementById("detailImage").src =
+    p.image || "";
+
+  document.getElementById("detailName").textContent =
+    p.name || "Produk";
+
+  document.getElementById("detailCategory").textContent =
+    p.category || "Produk";
+
+  document.getElementById("detailPrice").textContent =
+    p.price || "";
+
+  document.getElementById("detailDescription").textContent =
+    p.description || "Produk pilihan dari FinzMART.";
+
+  document.getElementById("detailBuy").href =
+    p.link || "#";
+
+  document.getElementById("productModal").style.display =
+    "flex";
+
+};
+
+window.removeFavorite = function(event,index){
+
+  event.stopPropagation();
+
+  favorites.splice(index,1);
+
+  localStorage.setItem(
+    "finzmartFavorites",
+    JSON.stringify(favorites)
+  );
+
+  showFavorites();
+
+};
+  
 /* CATEGORY */
 
 window.setCategory=function(category,button){
