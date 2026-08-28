@@ -1499,11 +1499,52 @@ window.openProductDetail=function(index){
 
   document.getElementById("detailBuy").href =
     p.link || "#";
+  
+  window.currentProductIndex = index;
 
   document.getElementById("productModal").style.display =
     "flex";
 };
 
+  // BAGIKAN PRODUK
+document.getElementById("shareProduct")
+.addEventListener("click", async function(){
+
+  const p = products[window.currentProductIndex];
+
+  if(!p) return;
+
+  const shareUrl =
+    window.location.origin +
+    window.location.pathname +
+    "?product=" +
+    encodeURIComponent(p.id);
+
+  try{
+
+    if(navigator.share){
+
+      await navigator.share({
+        title: p.name || "Produk FinzMART",
+        text: "Lihat produk ini di FinzMART:",
+        url: shareUrl
+      });
+
+    }else{
+
+      await navigator.clipboard.writeText(shareUrl);
+
+      alert("Link produk berhasil disalin!");
+
+    }
+
+  }catch(error){
+
+    console.log("Share dibatalkan:", error);
+
+  }
+
+});
 
 window.closeProductDetail=function(){
 
