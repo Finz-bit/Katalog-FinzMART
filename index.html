@@ -1429,10 +1429,14 @@ const searchOK =
   }
 </button>
 
-<img
-src="${(p.images && p.images.length ? p.images[0] : p.image) || ""}"
-alt="${p.name}">
+<div class="product-slider">
 
+  <img
+  class="product-slide"
+  src="${(p.images && p.images.length ? p.images[0] : p.image) || ""}"
+  alt="${p.name}">
+
+</div>
         <div class="card-content">
 
           <div class="number">
