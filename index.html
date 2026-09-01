@@ -336,12 +336,19 @@ header{
   overflow:hidden;
   box-shadow:0 4px 16px #0000000d;
   border:1px solid #eeeeee;
-  transition:.2s ease;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
 }
 
 .card:hover{
   transform:translateY(-3px);
   box-shadow:0 8px 24px #00000018;
+}
+
+.card:active{
+  transform:scale(.98);
+  box-shadow:0 3px 10px #00000012;
 }
 
 .card img{
@@ -350,7 +357,13 @@ header{
   object-fit:cover;
   display:block;
   background:#f0f1f2;
+  transition:transform .3s ease;
 }
+
+.card:hover img{
+  transform:scale(1.03);
+}
+
 
 .card-content{
   padding:12px;
