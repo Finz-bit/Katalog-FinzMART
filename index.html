@@ -1875,21 +1875,31 @@ if(files.length > 5){
   try{
 
     let imageURL = "";
+let imageURLs = [];
 
-    document.getElementById("uploadStatus")
-    .innerText="⏳ Menyimpan produk...";
+document.getElementById("uploadStatus")
+.innerText="⏳ Menyimpan produk...";
 
 
-    if(files.length){
+if(files.length){
 
   document.getElementById("uploadStatus")
   .innerText =
-    "📸 Mengupload foto...";
+    "📸 Mengupload " + files.length + " foto...";
+
+  for(const file of files){
+
+    const url =
+      await uploadImage(file);
+
+    imageURLs.push(url);
+
+  }
 
   imageURL =
-    await uploadImage(files[0]);
+    imageURLs[0] || "";
 
-    }
+}
 
 
     if(editingId){
