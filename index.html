@@ -363,45 +363,7 @@ header{
 .card:hover img{
   transform:scale(1.03);
 }
-  
-.product-slider{
-  position:relative;
-  width:100%;
-  aspect-ratio:1/1;
-  overflow:hidden;
-  background:#f0f1f2;
-  touch-action:pan-y;
-}
 
-.product-slide{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .25s ease;
-}
-
-.slider-dots{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:8px;
-  display:flex;
-  justify-content:center;
-  gap:4px;
-}
-
-.slider-dot{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#ffffff99;
-}
-
-.slider-dot.active{
-  background:white;
-  transform:scale(1.25);
-}
 
 .card-content{
   padding:12px;
@@ -533,21 +495,6 @@ header{
   border-radius:12px;
   margin-top:8px;
   display:none;
-}
-
-  #imagePreviewList{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:8px;
-}
-
-.multi-preview{
-  width:80px;
-  height:80px;
-  object-fit:cover;
-  border-radius:10px;
-  border:2px solid #eee;
 }
 
 /* PRODUK ADMIN */
@@ -1068,13 +1015,12 @@ Keluar
 </label>
 
 <input
-  id="pImageFile"
-  type="file"
-  accept="image/*"
-  multiple
-  onchange="previewImages(event)">
+id="pImageFile"
+type="file"
+accept="image/*"
+onchange="previewImage(event)">
 
-<div id="imagePreviewList"></div>
+<img id="preview" class="preview">
 
 <input id="pLink" placeholder="Link affiliate Tokopedia">
 
@@ -1483,28 +1429,9 @@ const searchOK =
   }
 </button>
 
-<div
-  class="product-slider"
-  data-index="${products.indexOf(p)}">
-
-  <img
-    class="product-slide"
-    src="${p.image || ""}"
-    alt="${p.name}">
-
-  ${
-    p.images && p.images.length > 1
-    ? `
-      <div class="slider-dots">
-        ${p.images.map((img,i)=>`
-          <span class="slider-dot ${i === 0 ? "active" : ""}"></span>
-        `).join("")}
-      </div>
-    `
-    : ""
-  }
-
-</div>
+<img
+src="${p.image}"
+alt="${p.name}">
 
         <div class="card-content">
 
@@ -1559,97 +1486,6 @@ onclick="event.stopPropagation()">
   });
 
 }
-
- /* PRODUCT IMAGE SWIPE */
-
-document.addEventListener("touchstart", function(e){
-
-  const slider =
-    e.target.closest(".product-slider");
-
-  if(!slider) return;
-
-  slider.dataset.startX =
-    e.touches[0].clientX;
-
-});
-
-
-document.addEventListener("touchend", function(e){
-
-  const slider =
-    e.target.closest(".product-slider");
-
-  if(!slider) return;
-
-  const startX =
-    parseFloat(slider.dataset.startX);
-
-  if(isNaN(startX)) return;
-
-  const endX =
-    e.changedTouches[0].clientX;
-
-  const diff =
-    startX - endX;
-
-  if(Math.abs(diff) < 40) return;
-
-  const index =
-    Number(slider.dataset.index);
-
-  const product =
-    products[index];
-
-  if(!product) return;
-
-  const images =
-    product.images && product.images.length
-    ? product.images
-    : [product.image];
-
-  let current =
-    Number(slider.dataset.slide || 0);
-
-  if(diff > 0){
-
-    current++;
-
-    if(current >= images.length){
-      current = 0;
-    }
-
-  }else{
-
-    current--;
-
-    if(current < 0){
-      current = images.length - 1;
-    }
-
-  }
-
-  slider.dataset.slide = current;
-
-  const img =
-    slider.querySelector(".product-slide");
-
-  img.src =
-    images[current];
-
-  const dots =
-    slider.querySelectorAll(".slider-dot");
-
-  dots.forEach((dot,i)=>{
-
-    dot.classList.toggle(
-      "active",
-      i === current
-    );
-
-  });
-
-});   
 
 /* DETAIL PRODUK */
 
@@ -1913,46 +1749,20 @@ window.setCategory=function(category,button){
 
 /* PREVIEW */
 
-window.previewImages=function(event){
+window.previewImage=function(event){
 
-  const files =
-    Array.from(event.target.files);
+  const file =
+  event.target.files[0];
 
-  const previewList =
-    document.getElementById("imagePreviewList");
+  if(!file)return;
 
-  previewList.innerHTML="";
+  const preview =
+  document.getElementById("preview");
 
-  if(!files.length)return;
+  preview.src=
+  URL.createObjectURL(file);
 
-  if(files.length > 5){
-
-    alert("Maksimal 5 foto.");
-
-    event.target.value="";
-
-    return;
-
-  }
-
-  files.forEach((file,index)=>{
-
-    const img =
-    document.createElement("img");
-
-    img.src =
-    URL.createObjectURL(file);
-
-    img.className="multi-preview";
-
-    img.title =
-    index === 0
-    ? "Foto utama"
-    : "Foto "+(index+1);
-
-    previewList.appendChild(img);
-
-  });
+  preview.style.display="block";
 
 }
 
@@ -2029,18 +1839,8 @@ document.getElementById("pOldPrice").value.trim();
   const link =
   document.getElementById("pLink").value.trim();
 
-  const files =
-Array.from(
-  document.getElementById("pImageFile").files
-);
-
-if(files.length > 5){
-
-  alert("Maksimal 5 foto.");
-
-  return;
-
-}
+  const file =
+  document.getElementById("pImageFile").files[0];
 
 
   if(!name || !price || !link){
@@ -2060,31 +1860,15 @@ if(files.length > 5){
     .innerText="⏳ Menyimpan produk...";
 
 
-    let imageURL = "";
-let imageURLs = [];
+    if(file){
 
-document.getElementById("uploadStatus")
-.innerText="⏳ Menyimpan produk...";
+      document.getElementById("uploadStatus")
+      .innerText="📸 Mengupload foto...";
 
-if(files.length){
-
-  document.getElementById("uploadStatus")
-  .innerText =
-    "📸 Mengupload "+files.length+" foto...";
-
-  for(const file of files){
-
-    const url =
+      imageURL =
       await uploadImage(file);
 
-    imageURLs.push(url);
-
-  }
-
-  imageURL =
-    imageURLs[0] || "";
-
-}
+    }
 
 
     if(editingId){
@@ -2101,7 +1885,6 @@ if(files.length){
           oldPrice,
           category,
           link,
-          images:imageURLs,
 
           ...(imageURL
           ? {image:imageURL}
@@ -2127,11 +1910,10 @@ if(files.length){
           price,
           oldPrice,
           category,
-link,
-image:imageURL,
-images:imageURLs,
+          link,
+          image:imageURL,
 
-createdAt:Date.now()
+          createdAt:Date.now()
 
         }
       );
@@ -2356,4 +2138,4 @@ loadProducts();
 </script>
 
 </body>
-    </html>
+  </html>
