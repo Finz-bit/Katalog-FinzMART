@@ -1847,8 +1847,18 @@ document.getElementById("pOldPrice").value.trim();
   const link =
   document.getElementById("pLink").value.trim();
 
-  const file =
-  document.getElementById("pImageFile").files[0];
+  const files =
+Array.from(
+  document.getElementById("pImageFile").files
+);
+
+if(files.length > 5){
+
+  alert("Maksimal 5 foto.");
+
+  return;
+
+}
 
 
   if(!name || !price || !link){
