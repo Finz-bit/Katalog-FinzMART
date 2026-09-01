@@ -1749,18 +1749,28 @@ window.setCategory=function(category,button){
 
 window.previewImage=function(event){
 
-  const file =
-  event.target.files[0];
+  const files =
+    Array.from(event.target.files);
 
-  if(!file)return;
+  if(!files.length) return;
+
+  if(files.length > 5){
+
+    alert("Maksimal 5 foto.");
+
+    event.target.value="";
+
+    return;
+  }
 
   const preview =
-  document.getElementById("preview");
+    document.getElementById("preview");
 
-  preview.src=
-  URL.createObjectURL(file);
+  preview.src =
+    URL.createObjectURL(files[0]);
 
-  preview.style.display="block";
+  preview.style.display =
+    "block";
 
 }
 
