@@ -1878,13 +1878,14 @@ if(files.length > 5){
     .innerText="⏳ Menyimpan produk...";
 
 
-    if(file){
+    if(files.length){
 
-      document.getElementById("uploadStatus")
-      .innerText="📸 Mengupload foto...";
+  document.getElementById("uploadStatus")
+  .innerText =
+    "📸 Mengupload foto...";
 
-      imageURL =
-      await uploadImage(file);
+  imageURL =
+    await uploadImage(files[0]);
 
     }
 
