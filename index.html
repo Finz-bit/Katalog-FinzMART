@@ -1406,7 +1406,9 @@ const searchOK =
 
     container.innerHTML += `
 
-      <div class="card" onclick="openProductDetail(${products.indexOf(p)})">
+      <div class="card"
+     data-product-index="${products.indexOf(p)}"
+     onclick="openProductDetail(${products.indexOf(p)})">
 <button
   class="favorite-btn"
   onclick="toggleFavorite(event, ${products.indexOf(p)})">
@@ -1491,6 +1493,89 @@ onclick="event.stopPropagation()">
 
 }
 
+/* SWIPE FOTO PRODUK */
+
+document.addEventListener("touchstart", function(e){
+
+  const slider =
+    e.target.closest(".product-slider");
+
+  if(!slider) return;
+
+  slider.dataset.startX =
+    e.touches[0].clientX;
+
+});
+
+
+document.addEventListener("touchend", function(e){
+
+  const slider =
+    e.target.closest(".product-slider");
+
+  if(!slider) return;
+
+  const startX =
+    parseFloat(slider.dataset.startX);
+
+  if(isNaN(startX)) return;
+
+  const endX =
+    e.changedTouches[0].clientX;
+
+  const diff =
+    startX - endX;
+
+  if(Math.abs(diff) < 40) return;
+
+  const card =
+    slider.closest(".card");
+
+  if(!card) return;
+
+  const index =
+    Number(card.dataset.productIndex);
+
+  const product =
+    products[index];
+
+  if(!product) return;
+
+  const images =
+    product.images && product.images.length
+    ? product.images
+    : [product.image];
+
+  if(images.length <= 1) return;
+
+  let current =
+    Number(slider.dataset.slide || 0);
+
+  if(diff > 0){
+
+    current++;
+
+    if(current >= images.length){
+      current = 0;
+    }
+
+  }else{
+
+    current--;
+
+    if(current < 0){
+      current = images.length - 1;
+    }
+
+  }
+
+  slider.dataset.slide = current;
+
+  slider.querySelector(".product-slide").src =
+    images[current];
+
+});
+    
 /* DETAIL PRODUK */
 
 window.openProductDetail=function(index){
