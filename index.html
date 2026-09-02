@@ -1708,8 +1708,18 @@ document.addEventListener("touchend", function(e){
 
   slider.dataset.slide = current;
 
-  document.getElementById("detailImage").src =
-    images[current];
+document.getElementById("detailImage").src =
+  images[current];
+
+const dots =
+  document.querySelectorAll("#detailDots span");
+
+dots.forEach((dot, i) => {
+  dot.classList.toggle(
+    "active",
+    i === current
+  );
+});
 
 });
     
