@@ -1442,6 +1442,14 @@ const searchOK =
   src="${(p.images && p.images.length ? p.images[0] : p.image) || ""}"
   alt="${p.name}">
 
+${(p.images && p.images.length > 1)
+  ? `<div class="slide-dots">
+      ${p.images.map((_, i) =>
+        `<span class="${i === 0 ? "active" : ""}"></span>`
+      ).join("")}
+    </div>`
+  : ""}
+
 </div>
         <div class="card-content">
 
