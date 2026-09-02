@@ -364,6 +364,44 @@ header{
   transform:scale(1.03);
 }
 
+.product-slider{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  background:#f0f1f2;
+}
+
+.product-slide{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.slide-dots{
+  position:absolute;
+  bottom:8px;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  z-index:2;
+}
+
+.slide-dots span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:white;
+  opacity:.6;
+  box-shadow:0 1px 3px #0006;
+}
+
+.slide-dots span.active{
+  opacity:1;
+}
 
 .card-content{
   padding:12px;
