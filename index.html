@@ -1772,8 +1772,34 @@ window.openProductDetail=function(index){
 
   if(!p) return;
 
+  const detailImages =
+    p.images && p.images.length
+    ? p.images
+    : [p.image];
+
   document.getElementById("detailImage").src =
-    p.image || "";
+    detailImages[0] || "";
+
+  const detailDots =
+    document.getElementById("detailDots");
+
+  detailDots.innerHTML = "";
+
+  detailImages.forEach((_, i) => {
+
+    const dot =
+      document.createElement("span");
+
+    if(i === 0){
+      dot.classList.add("active");
+    }
+
+    detailDots.appendChild(dot);
+
+  });
+
+  document.getElementById("detailSlider")
+    .dataset.slide = 0;
 
   document.getElementById("detailName").textContent =
     p.name || "Produk";
@@ -1789,7 +1815,7 @@ window.openProductDetail=function(index){
 
   document.getElementById("detailBuy").href =
     p.link || "#";
-  
+
   window.currentProductIndex = index;
 
   document.getElementById("productModal").style.display =
