@@ -493,17 +493,41 @@ header{
 }
   
 .buy{
-  display:block;
-  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+
   margin-top:10px;
   padding:10px 8px;
-  background:#00a86b;
+
+  background:linear-gradient(135deg,#008f5a,#00b873);
   color:white;
   text-decoration:none;
-  border-radius:10px;
+
+  border-radius:11px;
+
   font-size:13px;
-  font-weight:bold;
+  font-weight:800;
+
+  box-shadow:0 4px 12px #00a86b30;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
 }
+
+.buy:hover{
+  filter:brightness(1.04);
+  box-shadow:0 6px 16px #00a86b38;
+}
+
+.buy:active{
+  transform:scale(.96);
+  box-shadow:0 3px 8px #00a86b25;
+}
+  
 .buy-icon{
   width:17px;
   height:17px;
