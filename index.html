@@ -323,32 +323,49 @@ header{
 }
 
 .categories button{
-  border:1px solid #e2e8e5;
-  padding:9px 16px;
-  border-radius:14px;
-  background:white;
+  border:1px solid #e1e9e5;
+  padding:10px 18px;
+  border-radius:16px;
+
+  background:rgba(255,255,255,.92);
   color:#3f4a45;
+
   white-space:nowrap;
   font-size:13px;
-  font-weight:600;
+  font-weight:700;
+
   cursor:pointer;
+
   display:flex;
   align-items:center;
   justify-content:center;
   gap:6px;
-  min-height:38px;
-  transition:.2s ease;
+
+  min-height:42px;
+
+  box-shadow:0 3px 10px #00000008;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+.categories button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 15px #00000010;
 }
 
 .categories button:active{
-  transform:scale(.96);
+  transform:scale(.95);
 }
 
 .categories button.active{
-  background:#008f5a;
+  background:linear-gradient(135deg,#008f5a,#00b873);
   color:white;
   border-color:#008f5a;
-  box-shadow:0 4px 12px #008f5a30;
+  box-shadow:0 6px 16px #00a86b30;
 }
 
 /* PRODUK */
