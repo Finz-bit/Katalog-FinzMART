@@ -213,6 +213,36 @@ header::after{
   }
 
 }
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+
+  top:-70px;
+  right:-50px;
+
+  background:rgba(255,255,255,.14);
+  filter:blur(12px);
+
+  animation:heroGlow 6s ease-in-out infinite;
+
+  pointer-events:none;
+}
+
+@keyframes heroGlow{
+  0%,100%{
+    transform:translate(0,0) scale(1);
+    opacity:.5;
+  }
+
+  50%{
+    transform:translate(-35px,35px) scale(1.15);
+    opacity:.9;
+  }
+}
   
 .hero h1{
   font-size:30px;
