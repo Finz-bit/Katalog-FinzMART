@@ -666,6 +666,63 @@ header{
   opacity:1 !important;
 }
 
+.swipe-hint{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:10;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  padding:8px 12px;
+  border-radius:20px;
+
+  background:rgba(0,0,0,.55);
+  color:white;
+
+  font-size:12px;
+  font-weight:600;
+
+  pointer-events:none;
+
+  animation:
+    swipeHintMove 1.5s ease-in-out infinite,
+    swipeHintFade 5s ease forwards;
+}
+
+.swipe-hint svg{
+  width:20px;
+  height:20px;
+  flex-shrink:0;
+}
+
+@keyframes swipeHintMove{
+
+  0%,100%{
+    transform:translate(-50%,-50%);
+  }
+
+  50%{
+    transform:translate(-42%,-50%);
+  }
+
+}
+
+@keyframes swipeHintFade{
+
+  0%,60%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+  }
+
+}
+
 .detail-content{
   padding:20px;
 }
@@ -1152,6 +1209,21 @@ Batal Edit
   <img id="detailImage" class="detail-image">
 
   <div id="detailDots" class="slide-dots"></div>
+      
+  <div id="swipeHint" class="swipe-hint">
+
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M8 12h8M13 7l5 5-5 5"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+  </svg>
+
+  <span>Geser</span>
+
+  </div>
 
     </div>
     
