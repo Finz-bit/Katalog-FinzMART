@@ -1688,9 +1688,78 @@ dots.forEach((dot, i) => {
 
 });
 
-  /* SWIPE FOTO DETAIL */
+/* SWIPE FOTO DETAIL + AUTO SLIDE */
 
 let detailStartX = 0;
+let detailAutoSlide = null;
+
+
+function changeDetailPhoto(direction){
+
+  const slider =
+    document.getElementById("detailSlider");
+
+  if(!slider) return;
+
+  const index =
+    window.currentProductIndex;
+
+  const product =
+    products[index];
+
+  if(!product) return;
+
+  const images =
+    product.images && product.images.length
+    ? product.images
+    : [product.image];
+
+  if(images.length <= 1) return;
+
+  let current =
+    Number(slider.dataset.slide || 0);
+
+  current += direction;
+
+  if(current >= images.length){
+    current = 0;
+  }
+
+  if(current < 0){
+    current = images.length - 1;
+  }
+
+  slider.dataset.slide = current;
+
+  const image =
+    document.getElementById("detailImage");
+
+  image.style.opacity = "0";
+
+  setTimeout(function(){
+
+    image.src = images[current];
+
+    image.style.opacity = "1";
+
+  },150);
+
+  const dots =
+    document.querySelectorAll("#detailDots span");
+
+  dots.forEach((dot, i) => {
+
+    dot.classList.toggle(
+      "active",
+      i === current
+    );
+
+  });
+
+}
+
+
+/* SWIPE */
 
 document.addEventListener("touchstart", function(e){
 
@@ -1720,59 +1789,34 @@ document.addEventListener("touchend", function(e){
 
   if(Math.abs(diff) < 40) return;
 
-  const index =
-    window.currentProductIndex;
-
-  const product =
-    products[index];
-
-  if(!product) return;
-
-  const images =
-    product.images && product.images.length
-    ? product.images
-    : [product.image];
-
-  if(images.length <= 1) return;
-
-  let current =
-    Number(slider.dataset.slide || 0);
-
   if(diff > 0){
 
-    current++;
-
-    if(current >= images.length){
-      current = 0;
-    }
+    changeDetailPhoto(1);
 
   }else{
 
-    current--;
-
-    if(current < 0){
-      current = images.length - 1;
-    }
+    changeDetailPhoto(-1);
 
   }
 
-  slider.dataset.slide = current;
-
-document.getElementById("detailImage").src =
-  images[current];
-
-const dots =
-  document.querySelectorAll("#detailDots span");
-
-dots.forEach((dot, i) => {
-  dot.classList.toggle(
-    "active",
-    i === current
-  );
 });
 
-});
-    
+
+/* AUTO SLIDE */
+
+function startDetailAutoSlide(){
+
+  clearInterval(detailAutoSlide);
+
+  detailAutoSlide =
+    setInterval(function(){
+
+      changeDetailPhoto(1);
+
+    },3000);
+
+}
+  
 /* DETAIL PRODUK */
 
 window.openProductDetail=function(index){
@@ -1829,6 +1873,8 @@ window.openProductDetail=function(index){
 
   document.getElementById("productModal").style.display =
     "flex";
+
+  startDetailAutoSlide();
 };
 
   // BAGIKAN PRODUK
