@@ -634,27 +634,36 @@ header{
 
 .detail-slider .slide-dots{
   position:absolute;
-  bottom:10px;
+  bottom:12px;
   left:0;
   right:0;
   display:flex;
   justify-content:center;
-  gap:6px;
-  z-index:3;
+  align-items:center;
+  gap:7px;
+  z-index:999;
+  pointer-events:none;
 }
 
 .detail-slider .slide-dots span{
-  width:7px;
-  height:7px;
+  display:block;
+  width:8px;
+  height:8px;
+  min-width:8px;
+  min-height:8px;
   border-radius:50%;
-  background:#00a86b;
-  opacity:.55;
-  box-shadow:0 1px 4px #0006;
+  background:#00a86b !important;
+  opacity:1 !important;
+  box-shadow:0 1px 4px rgba(0,0,0,.35);
 }
 
 .detail-slider .slide-dots span.active{
-  opacity:1;
-  transform:scale(1.2);
+  width:10px;
+  height:10px;
+  min-width:10px;
+  min-height:10px;
+  background:#00a86b !important;
+  opacity:1 !important;
 }
 
 .detail-content{
