@@ -177,6 +177,43 @@ header::after{
     inset 0 1px 0 rgba(255,255,255,.2);
 }
 
+.hero::after{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-80%;
+
+  width:45%;
+  height:200%;
+
+  background:linear-gradient(
+    100deg,
+    transparent,
+    rgba(255,255,255,.18),
+    rgba(255,255,255,.45),
+    rgba(255,255,255,.18),
+    transparent
+  );
+
+  transform:skewX(-20deg);
+
+  animation:heroLight 5s ease-in-out infinite;
+
+  pointer-events:none;
+}
+
+@keyframes heroLight{
+
+  0%,45%{
+    left:-80%;
+  }
+
+  70%,100%{
+    left:140%;
+  }
+
+}
+  
 .hero h1{
   font-size:30px;
   line-height:1.15;
