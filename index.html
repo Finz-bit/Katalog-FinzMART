@@ -462,7 +462,11 @@ header{
   width:100%;
   aspect-ratio:1/1;
   overflow:hidden;
+
   background:#f0f1f2;
+
+  border-radius:0;
+  isolation:isolate;
 }
 
 .product-slide{
@@ -470,6 +474,10 @@ header{
   height:100%;
   object-fit:cover;
   display:block;
+
+  transition:
+    opacity .25s ease,
+    transform .35s ease;
 }
 
 .slide-dots{
