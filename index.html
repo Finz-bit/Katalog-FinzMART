@@ -133,8 +133,17 @@ header{
 .promo-container{
   position:relative;
   overflow:hidden;
-  border-radius:20px;
-  box-shadow:0 6px 20px #0002;
+  border-radius:22px;
+  box-shadow:0 8px 28px #00000018;
+  isolation:isolate;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.promo-container:active{
+  transform:scale(.99);
+  box-shadow:0 5px 18px #00000015;
 }
 
 .promo-track{
