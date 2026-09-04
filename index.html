@@ -279,6 +279,19 @@ header::after{
   box-shadow:0 5px 18px #00000015;
 }
 
+.video-banner{
+  position:relative;
+  aspect-ratio:16/9;
+  background:#003d29;
+}
+
+.banner-video{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+  
 .promo-track{
   display:flex;
   transition:transform .45s ease;
@@ -1307,45 +1320,28 @@ header::after{
 <h1>Belanja lebih mudah di FinzMART</h1>
 <p>Temukan produk pilihan dan cek produknya langsung.</p>
 </section>
-  <!-- BANNER PROMO -->
+
+  <!-- VIDEO BANNER -->
 <div class="promo-slider">
-  <div class="promo-container">
 
-    <div class="promo-track" id="promoTrack">
+  <div class="promo-container video-banner">
 
-      <div class="promo-slide">
-        <div class="promo-text">
-          <h2>🔥 Promo Spesial FinzMART!</h2>
-          <p>Temukan berbagai produk menarik dengan harga lebih hemat.</p>
-        </div>
-        <div class="promo-icon">🛍️</div>
-      </div>
+    <video
+      class="banner-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata">
 
-      <div class="promo-slide">
-        <div class="promo-text">
-          <h2>💸 Belanja Lebih Hemat</h2>
-          <p>Cari produk favoritmu dan temukan penawaran terbaik.</p>
-        </div>
-        <div class="promo-icon">🏷️</div>
-      </div>
+      <source
+        src="FinzMART_animated_banner.mp4"
+        type="video/mp4">
 
-      <div class="promo-slide">
-        <div class="promo-text">
-          <h2>✨ Pilihan Produk Terbaik</h2>
-          <p>Fashion, elektronik, kebutuhan sehari-hari, dan masih banyak lagi.</p>
-        </div>
-        <div class="promo-icon">⭐</div>
-      </div>
-
-    </div>
-
-    <div class="promo-dots">
-      <button class="promo-dot active" onclick="goPromo(0)"></button>
-      <button class="promo-dot" onclick="goPromo(1)"></button>
-      <button class="promo-dot" onclick="goPromo(2)"></button>
-    </div>
+    </video>
 
   </div>
+
 </div>
 
 <div class="search">
